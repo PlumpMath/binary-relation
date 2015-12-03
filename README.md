@@ -13,32 +13,33 @@ The speed of `countAs(b)` and `countBs(a)` greatly depends on `HashMap.count()` 
 
 ## Installation
 
-  npm install binary-relation --save
+     npm install binary-relation --save
 
 ## Usage
 
-  var BinaryRelation = require('binary-relation');
-  var likes = new BinaryRelation();
-  likes.add('John','Atlas');
-  likes.add('John','Encyclopedia');//it can be one-to-many if you want
-  likes.add('Alice','Encyclopedia');//it can be many-to-many
-  likes.add('John','Atlas');//duplicated add()s are ignored
-  likes.contains('John','Atlas')===true;
-  likes.countBs('John')==2;//sets are refered to as A and B, so countBs counts books
-  likes.getBs('John');//returns a permutation of ['Atlas','Encyclopedia']
-  likes.countAs('Atlas')==1;//and As refers to users
-  likes.getAs('Atlas');//returns (a permutation of) ['John']
-  likes.remove('John','Atlas');//single call to remove() is enough, even if there were multiple add()s
-  likes.contains('John','Atlas')===false;
+    var BinaryRelation = require('binary-relation');
+    var likes = new BinaryRelation();
+    likes.add('John','Atlas');
+    likes.add('John','Encyclopedia');  //it can be one-to-many if you want
+    likes.add('Alice','Encyclopedia');  //it can be many-to-many
+    likes.add('John','Atlas');  //duplicated add()s are ignored
+    likes.contains('John','Atlas')===true;
+    likes.countBs('John')===2;  //sets are refered to as A and B, so countBs counts books
+    likes.getBs('John');  //returns a permutation of ['Atlas','Encyclopedia']
+    likes.countAs('Atlas')===1;  //and As refers to users
+    likes.getAs('Atlas');  //returns (a permutation of) ['John']
+    likes.remove('John','Atlas');  //single call to remove() is enough, even if there were multiple add()s
+    likes.contains('John','Atlas')===false;
 
 ## Tests
 
-  npm test
+    npm test
 
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality. Lint and test your code.
+The source code is writen in TypeScript and the JS version is a result of compilation.
+Therefore proposed changes should be applied to the *.ts files.
+Please, add unit tests for any new or changed functionality.
 
 ## Release History
 
