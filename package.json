@@ -1,0 +1,21 @@
+{
+  "name": "binary-relation",
+  "version": "0.1.0",
+  "description": "Efficient implementation of in-memory relation between two sets of objects",
+  "private": true,
+  "main": "relation.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "author": "qbolec@gmail.com",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "hashmap": "git://github.com/qbolec/hashmap"
+  },
+  "devDependencies": {
+    "tsd": "~0.6.5",
+    "mocha": "~2.3.4",
+    "chai": "~3.4.1",
+    "tsc": "~1.20150623.0"
+  }
+}
