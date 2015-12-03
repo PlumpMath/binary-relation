@@ -1,5 +1,5 @@
 import HashMap = require('hashmap');
-export default class BinaryRelation<AType,BType> {
+class BinaryRelation<AType,BType> {
   aToBtoTrue:HashMap<AType,HashMap<BType,boolean>> = new HashMap<AType,HashMap<BType,boolean>>();
   bToAtoTrue:HashMap<BType,HashMap<AType,boolean>> = new HashMap<BType,HashMap<AType,boolean>>();
   private remove_xy<XType,YType>(xToYtoTrue:HashMap<XType,HashMap<YType,boolean>>, x_id:XType, y_id:YType) {
@@ -53,3 +53,4 @@ export default class BinaryRelation<AType,BType> {
   }
 
 }
+export = BinaryRelation;

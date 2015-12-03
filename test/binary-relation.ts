@@ -1,5 +1,5 @@
 import * as chai from "chai";
-import BinaryRelation from "../binary-relation";
+import BinaryRelation = require("../binary-relation");
 
 chai.should();
 
