@@ -43,4 +43,5 @@ Please, add unit tests for any new or changed functionality.
 
 ## Release History
 
+* 0.4.0 Fixed problems with node require vs TypeScript export
 * 0.1.0 Initial release
