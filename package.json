@@ -2,8 +2,7 @@
   "name": "binary-relation",
   "version": "0.3.0",
   "description": "Efficient implementation of in-memory relation between two sets of objects",
-  "private": true,
-  "main": "relation.js",
+  "main": "binary-relation.js",
   "scripts": {
     "tsd": "tsd install",
     "tsc": "tsc",
