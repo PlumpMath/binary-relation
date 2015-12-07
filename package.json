@@ -6,13 +6,17 @@
   "scripts": {
     "tsd": "tsd install",
     "tsc": "tsc",
+    "def": "tsc -d",
     "test": "mocha test/",
-    "prepublish": "npm run tsd && npm run tsc"
+    "prepublish": "npm run tsd && npm run tsc && npm run def"
   },
   "author": "qbolec@gmail.com",
   "license": "BSD-2-Clause",
   "dependencies": {
     "hashmap": "git://github.com/qbolec/hashmap"
+  },
+  "typescript":{
+    "definition":"binary-relation.d.ts"
   },
   "devDependencies": {
     "tsd": "~0.6.5",

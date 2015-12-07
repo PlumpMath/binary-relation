@@ -4,3 +4,5 @@ binary-relation.js
 test/binary-relation.js
 test/binary-relation.js.map
 typings
+binary-relation.d.ts
+test/binary-relation.d.ts
