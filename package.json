@@ -21,7 +21,7 @@
   "files": [
     "binary-relation.ts",
     "binary-relation.d.ts",
-    "binary-relation.js",
+    "binary-relation.js"
   ],
   "devDependencies": {
     "tsd": "~0.6.5",
