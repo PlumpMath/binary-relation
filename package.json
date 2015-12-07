@@ -1,6 +1,6 @@
 {
   "name": "binary-relation",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Efficient implementation of in-memory relation between two sets of objects",
   "main": "binary-relation.js",
   "scripts": {
@@ -15,8 +15,8 @@
   "dependencies": {
     "hashmap": "git://github.com/qbolec/hashmap"
   },
-  "typescript":{
-    "definition":"binary-relation.d.ts"
+  "typescript": {
+    "definition": "binary-relation.d.ts"
   },
   "devDependencies": {
     "tsd": "~0.6.5",
