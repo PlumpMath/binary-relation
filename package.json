@@ -1,6 +1,6 @@
 {
   "name": "binary-relation",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Efficient implementation of in-memory relation between two sets of objects",
   "main": "binary-relation.js",
   "scripts": {
