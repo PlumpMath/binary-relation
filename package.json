@@ -8,7 +8,7 @@
     "tsc": "tsc",
     "def": "tsc -d",
     "test": "mocha test/",
-    "prepublish": "npm run tsd && npm run tsc && npm run def"
+    "prepublish": "npm run tsd && npm run tsc"
   },
   "author": "qbolec@gmail.com",
   "license": "BSD-2-Clause",
