@@ -18,6 +18,11 @@
   "typescript": {
     "definition": "binary-relation.d.ts"
   },
+  "files": [
+    "binary-relation.ts",
+    "binary-relation.d.ts",
+    "binary-relation.js",
+  ],
   "devDependencies": {
     "tsd": "~0.6.5",
     "mocha": "~2.3.4",
