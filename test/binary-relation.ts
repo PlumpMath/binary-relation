@@ -60,27 +60,27 @@ describe('BinaryRelation',()=>{
   describe('BinaryRelation.get', () => {
     it('initially reports no link', () => {
       var relation = new BinaryRelation();
-      relation.get().should.deep.equal([]);
-      relation.get('user1').should.deep.equal([]);
-      relation.get(undefined,'book1').should.deep.equal([]);
-      relation.get('user1','book1').should.deep.equal([]);
+      relation.get().should.have.deep.members([]);
+      relation.get('user1').should.have.deep.members([]);
+      relation.get(undefined,'book1').should.have.deep.members([]);
+      relation.get('user1','book1').should.have.deep.members([]);
     })
     it('reports a link after add', () => {
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
-      relation.get().should.deep.equal([{a_id:"user1",b_id:"book1"}]);
-      relation.get('user1').should.deep.equal([{a_id:"user1",b_id:"book1"}]);
-      relation.get(undefined,'book1').should.deep.equal([{a_id:"user1",b_id:"book1"}]);
-      relation.get('user1','book1').should.deep.equal([{a_id:"user1",b_id:"book1"}]);
+      relation.get().should.have.deep.members([{a_id:"user1",b_id:"book1"}]);
+      relation.get('user1').should.have.deep.members([{a_id:"user1",b_id:"book1"}]);
+      relation.get(undefined,'book1').should.have.deep.members([{a_id:"user1",b_id:"book1"}]);
+      relation.get('user1','book1').should.have.deep.members([{a_id:"user1",b_id:"book1"}]);
     })
     it('reports no link after removal', () => {
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
       relation.remove('user1', 'book1');
-      relation.get().should.deep.equal([]);
-      relation.get('user1').should.deep.equal([]);
-      relation.get(undefined,'book1').should.deep.equal([]);
-      relation.get('user1','book1').should.deep.equal([]);
+      relation.get().should.have.deep.members([]);
+      relation.get('user1').should.have.deep.members([]);
+      relation.get(undefined,'book1').should.have.deep.members([]);
+      relation.get('user1','book1').should.have.deep.members([]);
     })
     it('reports several added elements',()=>{
       var relation = new BinaryRelation();
@@ -91,7 +91,7 @@ describe('BinaryRelation',()=>{
       relation.add('user2', 'book1');
       relation.add('user3', 'book1');
       relation.add('user4', 'book4');
-      relation.get().should.deep.equal([
+      relation.get().should.have.deep.members([
         {a_id:'user1', b_id:'book1'},
         {a_id:'user1', b_id:'book2'},
         {a_id:'user1', b_id:'book3'},
@@ -99,46 +99,46 @@ describe('BinaryRelation',()=>{
         {a_id:'user3', b_id:'book1'},
         {a_id:'user4', b_id:'book4'},
       ]);
-      relation.get(undefined,'book1').should.deep.equal([
+      relation.get(undefined,'book1').should.have.deep.members([
         {a_id:'user1', b_id:'book1'},
         {a_id:'user2', b_id:'book1'},
         {a_id:'user3', b_id:'book1'},
       ]);
-      relation.get(undefined,'book2').should.deep.equal([
+      relation.get(undefined,'book2').should.have.deep.members([
         {a_id:'user1', b_id:'book2'},
       ]);
-      relation.get(undefined,'book3').should.deep.equal([
+      relation.get(undefined,'book3').should.have.deep.members([
         {a_id:'user1', b_id:'book3'},
       ]);
-      relation.get(undefined,'book4').should.deep.equal([
+      relation.get(undefined,'book4').should.have.deep.members([
         {a_id:'user4', b_id:'book4'},
       ]);
-      relation.get(undefined,'book5').should.deep.equal([
+      relation.get(undefined,'book5').should.have.deep.members([
       ]);
-      relation.get('user1').should.deep.equal([
+      relation.get('user1').should.have.deep.members([
         {a_id:'user1', b_id:'book1'},
         {a_id:'user1', b_id:'book2'},
         {a_id:'user1', b_id:'book3'},
       ]);
-      relation.get('user2').should.deep.equal([
+      relation.get('user2').should.have.deep.members([
         {a_id:'user2', b_id:'book1'},
       ]);
-      relation.get('user3').should.deep.equal([
+      relation.get('user3').should.have.deep.members([
         {a_id:'user3', b_id:'book1'},
       ]);
-      relation.get('user4').should.deep.equal([
+      relation.get('user4').should.have.deep.members([
         {a_id:'user4', b_id:'book4'},
       ]);
-      relation.get('user5').should.deep.equal([]);
-      relation.get('user1', 'book1').should.deep.equal([
+      relation.get('user5').should.have.deep.members([]);
+      relation.get('user1', 'book1').should.have.deep.members([
         {a_id:'user1', b_id:'book1'},
       ]);
-      relation.get('user1', 'book2').should.deep.equal([{a_id:'user1', b_id:'book2'}]);
-      relation.get('user1', 'book3').should.deep.equal([{a_id:'user1', b_id:'book3'}]);
-      relation.get('user1', 'book1').should.deep.equal([{a_id:'user1', b_id:'book1'}]);
-      relation.get('user2', 'book1').should.deep.equal([{a_id:'user2', b_id:'book1'}]);
-      relation.get('user3', 'book1').should.deep.equal([{a_id:'user3', b_id:'book1'}]);
-      relation.get('user4', 'book4').should.deep.equal([{a_id:'user4', b_id:'book4'}]);
+      relation.get('user1', 'book2').should.have.deep.members([{a_id:'user1', b_id:'book2'}]);
+      relation.get('user1', 'book3').should.have.deep.members([{a_id:'user1', b_id:'book3'}]);
+      relation.get('user1', 'book1').should.have.deep.members([{a_id:'user1', b_id:'book1'}]);
+      relation.get('user2', 'book1').should.have.deep.members([{a_id:'user2', b_id:'book1'}]);
+      relation.get('user3', 'book1').should.have.deep.members([{a_id:'user3', b_id:'book1'}]);
+      relation.get('user4', 'book4').should.have.deep.members([{a_id:'user4', b_id:'book4'}]);
     })
   });
   describe('BinaryRelation.count', () => {
@@ -231,29 +231,29 @@ describe('BinaryRelation',()=>{
   describe('BinaryRelation.getAs',()=>{
     it('initially reports nothing',()=>{
       var relation = new BinaryRelation();
-      relation.getAs('user1').should.deep.equal([]);
-      relation.getAs().should.deep.equal([]);
+      relation.getAs('user1').should.have.members([]);
+      relation.getAs().should.have.members([]);
     })
     it('reports single element',()=>{
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
-      relation.getAs('book1').should.deep.equal(['user1']);
-      relation.getAs().should.deep.equal(['user1']);
+      relation.getAs('book1').should.have.members(['user1']);
+      relation.getAs().should.have.members(['user1']);
     })
     it('reports single element after double add',()=>{
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
       relation.add('user1', 'book1');
-      relation.getAs('book1').should.deep.equal(['user1']);
-      relation.getAs().should.deep.equal(['user1']);
+      relation.getAs('book1').should.have.members(['user1']);
+      relation.getAs().should.have.members(['user1']);
     })
     it('reports nothing after double add and single remove',()=>{
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
       relation.add('user1', 'book1');
       relation.remove('user1', 'book1');
-      relation.getAs('book1').should.deep.equal([]);
-      relation.getAs().should.deep.equal([]);
+      relation.getAs('book1').should.have.members([]);
+      relation.getAs().should.have.members([]);
     })
     it('reports several added elements',()=>{
       var relation = new BinaryRelation();
@@ -268,35 +268,35 @@ describe('BinaryRelation',()=>{
       relation.getAs('book2').should.have.members(['user1']);
       relation.getAs('book3').should.have.members(['user1']);
       relation.getAs('book4').should.have.members(['user4']);
-      relation.getAs().should.deep.equal(['user1','user2','user3','user4']);
+      relation.getAs().should.have.members(['user1','user2','user3','user4']);
     })
   })
   describe('BinaryRelation.getBs',()=>{
     it('initially reports nothing',()=>{
       var relation = new BinaryRelation();
-      relation.getBs('user1').should.deep.equal([]);
-      relation.getBs().should.deep.equal([]);
+      relation.getBs('user1').should.have.members([]);
+      relation.getBs().should.have.members([]);
     })
     it('reports single element',()=>{
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
-      relation.getBs('user1').should.deep.equal(['book1']);
-      relation.getBs().should.deep.equal(['book1']);
+      relation.getBs('user1').should.have.members(['book1']);
+      relation.getBs().should.have.members(['book1']);
     })
     it('reports single element after double add',()=>{
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
       relation.add('user1', 'book1');
-      relation.getBs('user1').should.deep.equal(['book1']);
-      relation.getBs().should.deep.equal(['book1']);
+      relation.getBs('user1').should.have.members(['book1']);
+      relation.getBs().should.have.members(['book1']);
     })
     it('reports nothing after double add and single remove',()=>{
       var relation = new BinaryRelation();
       relation.add('user1', 'book1');
       relation.add('user1', 'book1');
       relation.remove('user1', 'book1');
-      relation.getBs('user1').should.deep.equal([]);
-      relation.getBs().should.deep.equal([]);
+      relation.getBs('user1').should.have.members([]);
+      relation.getBs().should.have.members([]);
     })
     it('reports several added elements',()=>{
       var relation = new BinaryRelation();
