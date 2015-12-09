@@ -1,7 +1,10 @@
 import HashMap = require('hashmap');
-class BinaryRelation<AType,BType> {
+import * as events from "events";
+
+class BinaryRelation<AType,BType> extends events.EventEmitter{
   aToBtoTrue:HashMap<AType,HashMap<BType,boolean>> = new HashMap<AType,HashMap<BType,boolean>>();
   bToAtoTrue:HashMap<BType,HashMap<AType,boolean>> = new HashMap<BType,HashMap<AType,boolean>>();
+  _count = 0;
   private remove_xy<XType,YType>(xToYtoTrue:HashMap<XType,HashMap<YType,boolean>>, x_id:XType, y_id:YType) {
     var yToTrue = xToYtoTrue.get(x_id);
     if (yToTrue) {
@@ -27,29 +30,89 @@ class BinaryRelation<AType,BType> {
     var yToTrue = xToYtoTrue.get(x_id);
     return yToTrue ? yToTrue.count() : 0;
   }
-  remove(a_id:AType,b_id:BType):void{
-    this.remove_xy(this.aToBtoTrue, a_id, b_id);
-    this.remove_xy(this.bToAtoTrue, b_id, a_id);
+  remove(a_id?:AType,b_id?:BType):number{
+    var cnt = 0;
+    if(a_id === undefined){
+      if(b_id === undefined){
+        this.getBs().forEach((b_id)=>{
+          cnt+=this.remove(undefined, b_id);
+        })
+      }else{
+        this.getAs(b_id).forEach((a_id)=>{
+          cnt+=this.remove(a_id, b_id);
+        })
+      }
+    }else if(b_id === undefined){
+      this.getBs(a_id).forEach((b_id)=>{
+        cnt+=this.remove(a_id, b_id);
+      })
+    }else if(this.contains(a_id,b_id)){
+      this.remove_xy(this.aToBtoTrue, a_id, b_id);
+      this.remove_xy(this.bToAtoTrue, b_id, a_id);
+      --this._count;
+      this.emit('removed', a_id, b_id);
+      cnt = 1;
+    }
+    return cnt;
   }
-  add(a_id:AType,b_id:BType):void{
-    this.add_xy(this.aToBtoTrue, a_id, b_id);
-    this.add_xy(this.bToAtoTrue, b_id, a_id);
+  add(a_id:AType,b_id:BType):number{
+    if(!this.contains(a_id,b_id)){
+      this.add_xy(this.aToBtoTrue, a_id, b_id);
+      this.add_xy(this.bToAtoTrue, b_id, a_id);
+      ++this._count;
+      this.emit('added', a_id, b_id);
+      return 1;
+    }else{
+      return 0;
+    }
   }
-  contains(a_id:AType,b_id:BType):boolean{
-    var bToTrue = this.aToBtoTrue.get(a_id);
-    return !!(bToTrue && bToTrue.get(b_id));
+  count(a_id?:AType,b_id?:BType):number{
+    if(a_id===undefined){
+      if(b_id===undefined){
+        return this._count;
+      }else{
+        return this.countAs(b_id);
+      }
+    }else if(b_id==undefined){
+      return this.countBs(a_id);
+    }else{
+      return this.contains(a_id, b_id) ? 1 : 0;
+    }
   }
-  getBs(a_id:AType):BType[]{
-    return this.getYs(this.aToBtoTrue, a_id);
+  contains(a_id?:AType,b_id?:BType):boolean{
+    if(a_id === undefined){
+      if(b_id === undefined){
+        return 0 < this._count;
+      }else{
+        return this.bToAtoTrue.has(b_id);
+      }
+    }else if(b_id === undefined){
+      return this.aToBtoTrue.has(a_id);
+    }else{
+      var bToTrue = this.aToBtoTrue.get(a_id);
+      return !!(bToTrue && bToTrue.get(b_id));
+    }
   }
-  getAs(b_id:BType):AType[]{
-    return this.getYs(this.bToAtoTrue, b_id);
+  get(a_id?: AType, b_id?: BType): { a_id: AType;b_id:BType}[]{
+    if(a_id === undefined){
+      return [].concat.apply([], this.getAs(b_id).map((a_id) => this.get(a_id,b_id)));
+    }else if(b_id === undefined){
+      return this.getBs(a_id).map((b_id) => ({ a_id, b_id }));
+    }else{
+      return this.contains(a_id,b_id)?[{ a_id, b_id }]:[];
+    }
   }
-  countBs(a_id:AType):number{
-    return this.countYs(this.aToBtoTrue, a_id);
+  getBs(a_id?:AType):BType[]{
+    return (a_id===undefined) ? this.bToAtoTrue.keys() : this.getYs(this.aToBtoTrue, a_id);
   }
-  countAs(b_id:BType):number{
-    return this.countYs(this.bToAtoTrue, b_id);
+  getAs(b_id?:BType):AType[]{
+    return (b_id===undefined) ? this.aToBtoTrue.keys() : this.getYs(this.bToAtoTrue, b_id);
+  }
+  countBs(a_id?:AType):number{
+    return (a_id===undefined) ? this.bToAtoTrue.count() : this.countYs(this.aToBtoTrue, a_id);
+  }
+  countAs(b_id?:BType):number{
+    return (b_id===undefined) ? this.aToBtoTrue.count() : this.countYs(this.bToAtoTrue, b_id);
   }
 
 }

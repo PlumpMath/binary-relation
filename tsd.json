@@ -16,6 +16,9 @@
     },
     "assertion-error/assertion-error.d.ts": {
       "commit": "78d36dd49b6b55b9fdfe61776a12bf05c8b07777"
+    },
+    "node/node.d.ts": {
+      "commit": "19b4bf1c7bf2c7feccba05c7b235c1da3971f586"
     }
   }
 }
