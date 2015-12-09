@@ -1,13 +1,13 @@
 {
   "name": "binary-relation",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Efficient implementation of in-memory relation between two sets of objects",
   "main": "binary-relation.js",
   "scripts": {
     "tsd": "tsd install",
     "tsc": "tsc",
     "def": "tsc -d",
-    "pretest":"npm run tsc",
+    "pretest": "npm run tsc",
     "test": "mocha test/",
     "prepublish": "npm run tsd && npm run tsc"
   },
